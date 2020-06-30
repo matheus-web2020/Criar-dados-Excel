@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Aula27_28_29_30
@@ -11,8 +12,16 @@ namespace Aula27_28_29_30
             p1.Codigo = 2;
             p1.Nome = "Guitarra Gibson";
             p1.Preco = 4500f;
+            
 
             p1.Cadastrar(p1);
+
+            List<Produto> lista = new List<Produto>();
+            lista = p1.Ler();
+
+            foreach(Produto item in lista){
+                Console.WriteLine($"{item.Preco} - {item.Nome}");
+            }
 
         }
     }

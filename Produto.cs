@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Aula27_28_29_30
@@ -13,6 +15,8 @@ namespace Aula27_28_29_30
       private const string PATH = "Database/produto.csv";
 
       public Produto(){
+
+          
 
           string Pasta = PATH.Split('/')[0];
 
@@ -33,6 +37,35 @@ namespace Aula27_28_29_30
           File.AppendAllLines(PATH, linha);
 
 
+      }
+
+      public List<Produto> Ler(){
+
+      //Criar lista de Produtos
+      List<Produto> produtos = new List<Produto>();
+
+      // Transformas as linhas em array de strings
+      string[] linhas = File.ReadAllLines(PATH);
+
+      //Varremos o array de strings
+      foreach(var linha in linhas){
+          //Quebramos cada linha em partes
+          string[] dados = linha.Split(";");
+
+          //Tratamos os dadso e adicionamos em um novo produto
+          Produto prod = new Produto();
+          prod.Codigo = Int32.Parse(Separar(dados[0]));
+          prod.Nome = Separar(dados[1]);
+          prod.Preco = float.Parse(Separar(dados[2]));
+
+          produtos.Add(prod);
+
+      }
+
+      return produtos;
+      }
+      private string Separar(string _coluna){
+          return _coluna.Split("=")[1];
       }
 
 
